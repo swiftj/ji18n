@@ -36,9 +36,6 @@ import java.util.*;
 
 import org.swiftshire.i18n.annotation.ResourceBundle;
 
-import javax.management.DynamicMBean;
-import javax.management.MXBean;
-
 /**
  * Mojo for generating resource bundles from annotated source code.
  *
@@ -310,7 +307,7 @@ public class I18nMojo extends AbstractMojo {
 
         // Only specific interfaces can be message bundles.
         if (clazz.isInterface()) {
-            if (Messages.class.isAssignableFrom(clazz) || JmxHelper.isMBean(clazz)) {
+            if (Messages.class.isAssignableFrom(clazz)) {
 
                 // This defines the default resource bundle for the given class
                 ResourceBundleDefinition bundleDef =
@@ -523,8 +520,10 @@ public class I18nMojo extends AbstractMojo {
         File bundleFile = new File(bundle + ".properties");
         String resourceKeyValue = key + "=" + text;
 
-        getLog().debug("Writing to bundle file [" + bundleFile +
-                "] the key=message of: " + resourceKeyValue);
+        if (getLog().isDebugEnabled()) {
+            getLog().debug("Writing to bundle file [" + bundleFile +
+                    "] the key=message of: " + resourceKeyValue);
+        }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(bundleFile, doAppend))) {
             writer.println(resourceKeyValue);
@@ -726,104 +725,6 @@ public class I18nMojo extends AbstractMojo {
             }
             catch (Exception ignored) {
             }
-        }
-    }
-
-    /**
-     * Internal Java 6 MXBean verifier class
-     */
-    private static class JmxHelper {
-        /**
-         * Suffix used to identify an MBean interface.
-         */
-        private static final String MBEAN_SUFFIX = "MBean";
-
-        /**
-         * Suffix used to identify a Java 6 MXBean interface.
-         */
-        private static final String MXBEAN_SUFFIX = "MXBean";
-
-        /**
-         *
-         * @param iface
-         * @return
-         */
-        public static Boolean evaluateMXBeanAnnotation(Class<?> iface) {
-            MXBean mxBean = iface.getAnnotation(MXBean.class);
-            return (mxBean != null ? mxBean.value() : null);
-        }
-
-        /**
-         * Determine whether the given bean class qualifies as an MBean as-is.
-         * <p>This implementation checks for {@link javax.management.DynamicMBean}
-         * classes as well as classes with corresponding "*MBean" interface
-         * (Standard MBeans) or corresponding "*MXBean" interface (Java 6 MXBeans).
-         *
-         * @param clazz the bean class to analyze
-         * @return whether the class qualifies as an MBean
-         */
-        public static boolean isMBean(Class<?> clazz) {
-            return (clazz != null &&
-                    (DynamicMBean.class.isAssignableFrom(clazz) ||
-                            (getMBeanInterface(clazz) != null || getMXBeanInterface(clazz) != null)));
-        }
-
-        /**
-         * Return the Standard MBean interface for the given class, if any
-         * (that is, an interface whose name matches the class name of the
-         * given class but with suffix "MBean").
-         *
-         * @param clazz the class to check
-         * @return the Standard MBean interface for the given class
-         */
-        public static Class<?> getMBeanInterface(Class<?> clazz) {
-            if (clazz == null || clazz.getSuperclass() == null) {
-                return null;
-            }
-
-            String mbeanInterfaceName = clazz.getName() + JmxHelper.MBEAN_SUFFIX;
-
-            Class[] implementedInterfaces = clazz.getInterfaces();
-
-            for (Class<?> iface : implementedInterfaces) {
-                if (iface.getName().equals(mbeanInterfaceName)) {
-                    return iface;
-                }
-            }
-
-            return getMBeanInterface(clazz.getSuperclass());
-        }
-
-        /**
-         * Return the Java 6 MXBean interface exists for the given class, if any
-         * (that is, an interface whose name ends with "MXBean" and/or
-         * carries an appropriate MXBean annotation).
-         *
-         * @param clazz the class to check
-         * @return whether there is an MXBean interface for the given class
-         */
-        public static Class<?> getMXBeanInterface(Class<?> clazz) {
-            if (clazz == null || clazz.getSuperclass() == null) {
-                return null;
-            }
-
-            Class[] implementedInterfaces = clazz.getInterfaces();
-
-            for (Class<?> iface : implementedInterfaces) {
-                boolean isMxBean = iface.getName().endsWith(JmxHelper.MXBEAN_SUFFIX);
-
-                Boolean checkResult = JmxHelper.evaluateMXBeanAnnotation(iface);
-
-                if (checkResult != null) {
-                    isMxBean = checkResult;
-                }
-
-                if (isMxBean) {
-                    return iface;
-                }
-            }
-
-            return getMXBeanInterface(clazz.getSuperclass());
         }
     }
 

@@ -39,12 +39,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Creates message handlers of type {@link Messages} to perform l10n.
+ * Creates message handlers of type {@link Messages} to perform l10n within your application. Note that
+ * {@link Messages} defined by the application developer must follow certain rules or an exception
+ * will be raised.
+ * <p/>
+ * <pre class="code">
+ * public class Example {
+ *     // Recommended use for this factory object in application code
+ *     <mark>private static final ClientMessages i18n = MessageFactory.create(ClientMessages.class);</mark>
  *
- * Message handlers must follow certain rules in order to be accepted.
+ *     pubic static void main() {
+ *         // Prints the following to STDOUT: "Hello User. You visited this website 1 times"
+ *         System.out.println( i18n.hello("User", 1) );
+ *     }
+ * }
+ * </pre>
  *
  * @author swiftj
  * @since 1.0
+ * @see java.text.MessageFormat
  * @see Messages
  */
 public class MessageFactory {

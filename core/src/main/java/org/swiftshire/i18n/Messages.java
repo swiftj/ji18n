@@ -31,7 +31,8 @@ import java.util.ResourceBundle;
  * <p/>
  * To use this API, you must create your own interface that extends this interface and
  * yours must be annotated properly using {@link org.swiftshire.i18n.annotation.Message}
- * on each method which in turn must take the correct number and type of arguments for
+ * on each method which in turn must take the correct number and type of arguments using
+ * the standard {@link java.text.MessageFormat JDK MessageFormat} formatting options for
  * each respective message.
  *
  * <pre class="code">
@@ -40,7 +41,7 @@ import java.util.ResourceBundle;
  *     String welcome();
  *
  *     &#64;Message("Hello {0}. You visited this website {1} times")
- *     String hello(String name, int count);
+ *     <mark>String hello(String name, int count);</mark>
  * }
  * </pre>
  * With this set of I18n messages defined. One then uses the corresponding Maven or Gradle JI18n plugin in their project
@@ -54,13 +55,14 @@ import java.util.ResourceBundle;
  *
  *     pubic static void main() {
  *         // Prints the following to STDOUT: "Hello User. You visited this website 1 times"
- *         System.out.println( i18n.hello("User", 1) );
+ *         System.out.println( <mark>i18n.hello("User", 1)</mark> );
  *     }
  * }
  * </pre>
  *
  * @author swiftj
  * @since 1.0
+ * @see java.text.MessageFormat
  */
 public interface Messages {
     /**
