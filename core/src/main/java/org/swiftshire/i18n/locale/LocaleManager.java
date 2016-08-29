@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * A simple thread aware locale manager class.
  *
- * @author jswift
+ * @author swiftj
  */
 public class LocaleManager {
     /**

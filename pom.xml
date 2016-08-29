@@ -6,9 +6,30 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <name>JI18n :: Framework</name>
+    <url>http://www.swiftshire.org</url>
     <description>
     	A complete generic framework for supporting i18n in any Java application.
     </description>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>John Swift</name>
+            <email>john@swiftshire.org</email>
+            <organization>SwiftShire</organization>
+            <organizationUrl>http://www.swiftshire.org</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:swiftj/ji18n.git</connection>
+        <developerConnection>scm:git:git@github.com:swiftj/ji18n.git</developerConnection>
+        <url>git@github.com:swiftj/ji18n.git</url>
+    </scm>
     <prerequisites>
         <maven>3.0.0</maven>
     </prerequisites>
@@ -56,43 +77,53 @@
                     <version>2.5.2</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.3</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <stagingProfileId/>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <configLocation>
-                        ${basedir}/etc/style_checks.xml
-                    </configLocation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.7.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.4</version>
-                <configuration>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    <xmlOutput>true</xmlOutput>
-                    <threshold>Normal</threshold>
-                    <effort>Default</effort>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 
     <dependencyManagement>
         <dependencies>

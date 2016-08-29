@@ -43,7 +43,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * Message handlers must follow certain rules in order to be accepted.
  *
- * @author jswift
+ * @author swiftj
  * @since 1.0
  * @see Messages
  */

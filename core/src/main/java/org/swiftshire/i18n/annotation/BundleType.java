@@ -21,7 +21,7 @@ package org.swiftshire.i18n.annotation;
  * A resource bundle type. These constants are used with the {@link ResourceBundle} annotation type
  * to identify to the what type of resource bundle should be used. The default is {@code PROPERTY}.
  *
- * @author jswift
+ * @author swiftj
  * @since 1.0
  */
 public enum BundleType {
