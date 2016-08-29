@@ -51,7 +51,7 @@ import org.swiftshire.i18n.MessageFactory;
 public class Example {
     private static final TestMessages i18n = MessageFactory.create(TestMessages.class);
 
-    pubic static void main() {
+    public static void main() {
         // Prints the following to STDOUT: "Hello User. You visited this website 1 times"
         System.out.println( i18n.hello("User", 1) );
     }
