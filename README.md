@@ -30,7 +30,7 @@ you need. It's recommended that you use fairly lengthy and descriptive method na
 Note that methods *cannot* be overloaded so the names that you use must be *unique*!
 
 ```Java
-import org.swiftshire.i18n.Messages
+import org.swiftshire.i18n.Messages;
 import org.swiftshire.i18n.annotation.Message;
 
 public interface TestMessages extends Messages {
@@ -46,6 +46,8 @@ public interface TestMessages extends Messages {
 **Step 2** : Use these messages anywhere in your code via a static `MessageFactory` object like so:
 
 ```Java
+import org.swiftshire.i18n.MessageFactory;
+
 public class Example {
     private static final TestMessages i18n = MessageFactory.create(TestMessages.class);
 
@@ -105,7 +107,7 @@ This framework offers a number of compelling advantages including:
     
 ## Bugs and Feedback
 
-For bugs, questions and discussions please use the [Github Issues](https://github.com/swiftj/nifi-processors/issues).
+For bugs, questions and discussions please use the [Github Issues](https://github.com/swiftj/ji18n/issues).
 
 ## LICENSE
 
