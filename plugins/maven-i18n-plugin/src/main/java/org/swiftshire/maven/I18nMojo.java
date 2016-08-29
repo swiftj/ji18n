@@ -49,7 +49,7 @@ public class I18nMojo extends AbstractMojo {
     /**
      * The Maven project object
      *
-     * @parameter expression="${project}"
+     * @parameter property="${project}"
      * @required
      * @readonly
      */
@@ -59,7 +59,7 @@ public class I18nMojo extends AbstractMojo {
     /**
      * The basedir of the project.
      *
-     * @parameter expression="${basedir}"
+     * @parameter property="${basedir}"
      * @required
      * @readonly
      */
@@ -68,7 +68,7 @@ public class I18nMojo extends AbstractMojo {
     /**
      * This is where everything is built.
      *
-     * @parameter expression="${project.build.directory}"
+     * @parameter property="${project.build.directory}"
      * @required
      * @readonly
      */
@@ -78,7 +78,7 @@ public class I18nMojo extends AbstractMojo {
     /**
      * This is where compiled classes go.
      *
-     * @parameter expression="${project.build.outputDirectory}"
+     * @parameter property="${project.build.outputDirectory}"
      * @required
      * @readonly
      */
@@ -87,7 +87,7 @@ public class I18nMojo extends AbstractMojo {
     /**
      * This is where compiled test classes go.
      *
-     * @parameter expression="${project.build.testOutputDirectory}"
+     * @parameter property="${project.build.testOutputDirectory}"
      * @required
      * @readonly
      */
@@ -97,14 +97,14 @@ public class I18nMojo extends AbstractMojo {
     /**
      * Flag to indicate that this task should log some debug messages during processing.
      *
-     * @parameter expression="false"
+     * @parameter property="false"
      */
     protected boolean verbose = false;
 
     /**
      * Flag to indicate that this task should verify the correctness of the bundles and messages to be generated.
      *
-     * @parameter expression="true"
+     * @parameter property="true"
      */
     protected boolean verify = true;
 
@@ -119,21 +119,21 @@ public class I18nMojo extends AbstractMojo {
     /**
      * Flag to indicate that strict enforcement of i18n messages be done.
      *
-     * @parameter expression="false"
+     * @parameter property="false"
      */
     protected boolean pedantic = false;
 
     /**
      * Flag to indicate that all messages should be aggregated as well
      *
-     * @parameter expression="false"
+     * @parameter property="false"
      */
     protected boolean aggregate = false;
 
     /**
      * The fully-qualified name of the aggregate message bundle to create
      *
-     * @parameter expression="Messages"
+     * @parameter property="Messages"
      */
     protected String aggregateName = "Messages";
 
