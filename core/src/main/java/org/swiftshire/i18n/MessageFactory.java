@@ -80,10 +80,7 @@ public class MessageFactory {
     static final AtomicInteger fabricatedBundleCount = new AtomicInteger();
 
     /**
-     * Register our I18n MBean. We use a standard MBean here in lieu of our POJO
-     * approach available in the {@code com.netwitness.malware.tools.common.management} package
-     * because we don't want to pull in other run time dependencies for such a simple
-     * MBean and one merely for the I18n package. We're going for very lightweight here.
+     * Register our I18n MBean. 
      */
 	static {
 		try {

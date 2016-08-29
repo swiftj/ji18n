@@ -21,7 +21,7 @@ import java.lang.annotation.*;
 
 /**
  * Annotation that allows user more control over the backing resource bundle generated and processed by
- * the {@link MessageFactory} and the Maven i18n plugin.
+ * the {@link org.swiftshire.i18n.MessageFactory MessageFactory} and the Maven i18n plugin.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -52,11 +52,9 @@ public @interface ResourceBundle {
 
     /**
      * Optionally include a set of messages that are not tied to any particular
-     * method of the annotated {@link com.rsa.netwitness.carlos.i18n.Messages} class.
+     * method of the annotated {@link org.swiftshire.i18n.Messages Messages} class.
      * This allows one to statically include ad-hoc messages to the bundle without
-     * the need for an annotated method. This is useful for JSF message bundles
-     * where one overrides static JSF messages if they wish while still including
-     * their own messages.
+     * the need for an annotated method.
      *
      * @return
      */

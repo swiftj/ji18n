@@ -4,4 +4,4 @@
  *
  * @since 1.0
  */
-package com.rsa.netwitness.carlos.i18n;
+package org.swiftshire.i18n;
