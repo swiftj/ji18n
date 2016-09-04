@@ -66,7 +66,7 @@ localization team or company to localize for whatever target locale you wish to 
 
 **Step 1** : Add the following dependency to the `<dependencies/>` section of your POM:
 
-```
+```xml
 <dependency>
   <groupId>org.swiftshire</groupId>
   <artifactId>ji18n-core</artifactId>
@@ -76,7 +76,7 @@ localization team or company to localize for whatever target locale you wish to 
 
 **Step 2** : Add the following plugin definition to the `<plugins/>` section of your POM:
 
-```
+```xml
 <plugin>
     <groupId>org.swiftshire</groupId>
     <artifactId>ji18n-maven-plugin</artifactId>
