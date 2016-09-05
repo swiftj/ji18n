@@ -25,6 +25,16 @@
             <organizationUrl>http://www.swiftshire.org</organizationUrl>
         </developer>
     </developers>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <scm>
         <connection>scm:git:git@github.com:swiftj/ji18n.git</connection>
         <developerConnection>scm:git:git@github.com:swiftj/ji18n.git</developerConnection>
@@ -99,7 +109,7 @@
                     <configuration>
                         <serverId>ossrh</serverId>
                         <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <stagingProfileId/>
+                        <stagingProfileId>158e1a8f93c4cc</stagingProfileId>
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
